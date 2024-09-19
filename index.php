@@ -1,5 +1,11 @@
 <?php
-    include 'function.php'
+    session_start();
+    include 'function.php';
+    $authenticated = $_SESSION['auth'] ?? null;
+
+    if (empty($authenticated)) {
+        header('Location: login.php');
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -7,6 +13,8 @@
         <title>Contact Us</title>
     </head>
     <body>
+    <p>Welcome <?php echo $_SESSION['fullname']; ?>!</p>
+    <p><a href="logout.php">Logout</a> </p>
     <h1>Contact US</h1>
     <?php
         if (empty($submittedValues)) {
